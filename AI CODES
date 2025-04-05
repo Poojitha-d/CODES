@@ -1,0 +1,481 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Poojitha-d/CODES/blob/main/AI%20CODES\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#CODE-1\n",
+        "import numpy as np\n",
+        "array = np.array([2, 18, 52, 20, 8,89, 5])\n",
+        "sorted_array = np.sort(array)\n",
+        "print(\"Original Array:\", array)\n",
+        "print(\"Sorted Array:\", sorted_array)"
+      ],
+      "metadata": {
+        "id": "A2LLMSZs5Fki",
+        "outputId": "8f69b6a3-c9c5-4275-f91a-97281cc8c4ab",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 7,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Original Array: [ 2 18 52 20  8 89  5]\n",
+            "Sorted Array: [ 2  5  8 18 20 52 89]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#CODE-2\n",
+        "import pandas as pd\n",
+        "data = {\n",
+        "    'Name': ['Priya', 'Pinky', 'Nancy', 'Mintu'],\n",
+        "    'Age': [25, 30, 35, 40],\n",
+        "    'City': ['Africa', 'India', 'Butan', 'Australia']\n",
+        "}\n",
+        "df = pd.DataFrame(data)\n",
+        "print(\"DataFrame:\")\n",
+        "print(df)\n",
+        "print(\"\\nSummary Statistics:\")\n",
+        "print(df.describe(include='all'))\n",
+        "print(\"\\nFilter rows where Age > 30:\")\n",
+        "filtered_df = df[df['Age'] > 30]\n",
+        "print(filtered_df)\n",
+        "print(\"\\nAdd a new column (Salary):\")\n",
+        "df['Salary'] = [70000, 80000, 90000, 100000]\n",
+        "print(df)\n",
+        "print(\"\\nSave DataFrame to a CSV file:\")\n",
+        "df.to_csv('output.csv', index=False)\n",
+        "print(\"DataFrame saved to 'output.csv'\")"
+      ],
+      "metadata": {
+        "id": "G1M6MPfw54oW",
+        "outputId": "ea6ac629-c5ec-4630-c3a5-3eef7e7d8c6e",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 8,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "DataFrame:\n",
+            "    Name  Age       City\n",
+            "0  Priya   25     Africa\n",
+            "1  Pinky   30      India\n",
+            "2  Nancy   35      Butan\n",
+            "3  Mintu   40  Australia\n",
+            "\n",
+            "Summary Statistics:\n",
+            "         Name        Age    City\n",
+            "count       4   4.000000       4\n",
+            "unique      4        NaN       4\n",
+            "top     Priya        NaN  Africa\n",
+            "freq        1        NaN       1\n",
+            "mean      NaN  32.500000     NaN\n",
+            "std       NaN   6.454972     NaN\n",
+            "min       NaN  25.000000     NaN\n",
+            "25%       NaN  28.750000     NaN\n",
+            "50%       NaN  32.500000     NaN\n",
+            "75%       NaN  36.250000     NaN\n",
+            "max       NaN  40.000000     NaN\n",
+            "\n",
+            "Filter rows where Age > 30:\n",
+            "    Name  Age       City\n",
+            "2  Nancy   35      Butan\n",
+            "3  Mintu   40  Australia\n",
+            "\n",
+            "Add a new column (Salary):\n",
+            "    Name  Age       City  Salary\n",
+            "0  Priya   25     Africa   70000\n",
+            "1  Pinky   30      India   80000\n",
+            "2  Nancy   35      Butan   90000\n",
+            "3  Mintu   40  Australia  100000\n",
+            "\n",
+            "Save DataFrame to a CSV file:\n",
+            "DataFrame saved to 'output.csv'\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#CODE-3\n",
+        "import heapq\n",
+        "def uniform_cost_search(graph, start, goal):\n",
+        "    priority_queue = [(0, start, [])]\n",
+        "    visited = set()\n",
+        "    while priority_queue:\n",
+        "         cost, node, path = heapq.heappop(priority_queue)\n",
+        "         if node in visited:\n",
+        "              continue\n",
+        "         path = path + [node]\n",
+        "         visited.add(node)\n",
+        "         if node == goal:\n",
+        "              return cost, path\n",
+        "         for neighbor, edge_cost in graph.get(node, []):\n",
+        "              if neighbor not in visited:\n",
+        "                    heapq.heappush(priority_queue, (cost + edge_cost, neighbor, path))\n",
+        "float('inf'), []\n",
+        "graph = {\n",
+        "   'P': [('Q', 2), ('R', 3)],\n",
+        "   'Q': [('A', 2), ('S', 1), ('T', 5)],\n",
+        "   'R': [('P', 3), ('U', 6)],\n",
+        "   'S': [('Q', 1)],\n",
+        "   'T': [('Q', 5), ('V', 2)],\n",
+        "   'U': [('R', 6)],\n",
+        "   'V': [('T', 2)]\n",
+        "}\n",
+        "start_node = 'P'\n",
+        "goal_node = 'V'\n",
+        "cost, path = uniform_cost_search(graph, start_node, goal_node)\n",
+        "print(f\"Least-cost path from {start_node} to {goal_node}: {path}\")\n",
+        "print(f\"Total Cost: {cost}\")"
+      ],
+      "metadata": {
+        "id": "FqmGe3Uw55pE",
+        "outputId": "f266b7b0-21b9-4b37-c97f-a2ad191ce5c1",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Least-cost path from P to V: ['P', 'Q', 'T', 'V']\n",
+            "Total Cost: 9\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#CODE-4\n",
+        "import heapq\n",
+        "def a_star_search(graph, start, goal, heuristic):\n",
+        "    open_list = []\n",
+        "    heapq.heappush(open_list, (0, start))\n",
+        "    g_score = {node: float('inf') for node in graph}\n",
+        "    g_score[start] = 0\n",
+        "    f_score = {node: float('inf') for node in graph}\n",
+        "    f_score[start] = heuristic[start]\n",
+        "    came_from = {}\n",
+        "    while open_list:\n",
+        "        _, current = heapq.heappop(open_list)\n",
+        "        if current == goal:\n",
+        "            path = []\n",
+        "            while current in came_from:\n",
+        "                path.append(current)\n",
+        "                current = came_from[current]\n",
+        "            path.append(start)\n",
+        "            return path[::-1]\n",
+        "        for neighbor, cost in graph[current].items():\n",
+        "            temp_g = g_score[current] + cost\n",
+        "            if temp_g < g_score[neighbor]:\n",
+        "                came_from[neighbor] = current\n",
+        "                g_score[neighbor] = temp_g\n",
+        "                f_score[neighbor] = temp_g + heuristic[neighbor]\n",
+        "                heapq.heappush(open_list, (f_score[neighbor], neighbor))\n",
+        "    return None\n",
+        "\n",
+        "graph={'A':{'B':4,'C':3},\n",
+        "       'B':{'A':4,'E':12,'F':5},\n",
+        "       'C':{'A':3,'D':7,'E':10},\n",
+        "       'D':{'C':7,'E':2},\n",
+        "       'E':{'B':12,'C':10,'D':2,'Z':5},\n",
+        "       'F':{'B':5,'Z':16},\n",
+        "       'Z':{'E':5,'F':16}}\n",
+        "heuristic={'A':14,'B':12,'C':11,'D':6,'E':4,'F':11,'Z':0}\n",
+        "start='A'\n",
+        "goal='Z'\n",
+        "path=a_star_search(graph,start,goal,heuristic)\n",
+        "print(path)\n",
+        "print(\"A* Path and Cost Calculation:\")\n",
+        "path = a_star_search(graph, start, goal, heuristic)\n",
+        "print(f\"A* Path: {'->'.join(path)}\")\n",
+        "cost = sum(graph[path[i]][path[i + 1]] for i in range(len(path) - 1))\n",
+        "print(f\"Total Cost: {cost}\")"
+      ],
+      "metadata": {
+        "id": "_PyCsD4Y5-qN",
+        "outputId": "76fb9138-12d3-4228-885f-94ea46a33f9e",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 12,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "['A', 'C', 'D', 'E', 'Z']\n",
+            "A* Path and Cost Calculation:\n",
+            "A* Path: A->C->D->E->Z\n",
+            "Total Cost: 17\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#CODE-5\n",
+        "def minimax(depth, nodeIndex, maximizingPlayer, values, alpha, beta):\n",
+        "    if depth == 3:\n",
+        "        return values[nodeIndex]\n",
+        "    if maximizingPlayer:\n",
+        "        best = float('-inf')\n",
+        "        for i in range(2):\n",
+        "            val = minimax(depth + 1, nodeIndex * 2 + i, False, values, alpha, beta)\n",
+        "            best = max(best, val)\n",
+        "            alpha = max(alpha, best)\n",
+        "            if beta <= alpha:\n",
+        "                break\n",
+        "        return best\n",
+        "    else:\n",
+        "        best = float('inf')\n",
+        "        for i in range(2):\n",
+        "            val = minimax(depth + 1, nodeIndex * 2 + i, True, values, alpha, beta)\n",
+        "            best = min(best, val)\n",
+        "            beta = min(beta, best)\n",
+        "            if beta <= alpha:\n",
+        "                break\n",
+        "        return best\n",
+        "\n",
+        "values = [1, 2, 5, 7, 0, 1, 6, 4]\n",
+        "optimal_value = minimax(0, 0, True, values, float('-inf'), float('inf'))\n",
+        "print(\"The optimal value is:\", optimal_value)"
+      ],
+      "metadata": {
+        "id": "X2VK6mlj6vmN",
+        "outputId": "b05fbd1e-8973-48c4-9bdf-ad78e67c72f0",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 13,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "The optimal value is: 2\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#CODE-6\n",
+        "class GameTree:\n",
+        "    def __init__(self):\n",
+        "        self.tree = {\n",
+        "            'A': ['B', 'C'],\n",
+        "            'B': ['D', 'E'],\n",
+        "            'C': ['F', 'G'],\n",
+        "            'D': [3, 5],\n",
+        "            'E': [6, 1],\n",
+        "            'F': [2, 4],\n",
+        "            'G': [5, 3]\n",
+        "        }\n",
+        "def alpha_beta(node, depth, alpha, beta, maximizing_player, game_tree):\n",
+        "    if isinstance(game_tree.tree[node], list) and all(isinstance(x, int) for x in game_tree.tree[node]):\n",
+        "        return game_tree.tree[node][0] if depth % 2 == 0 else game_tree.tree[node][1]\n",
+        "    if maximizing_player:\n",
+        "        value = float('-inf')\n",
+        "        for child in game_tree.tree[node]:\n",
+        "            value = max(value, alpha_beta(child, depth + 1, alpha, beta, False, game_tree))\n",
+        "            alpha = max(alpha, value)\n",
+        "            if alpha >= beta:\n",
+        "                break\n",
+        "        return value\n",
+        "    else:\n",
+        "        value = float('inf')\n",
+        "        for child in game_tree.tree[node]:\n",
+        "            value = min(value, alpha_beta(child, depth + 1, alpha, beta, True, game_tree))\n",
+        "            beta = min(beta, value)\n",
+        "            if alpha >= beta:\n",
+        "                break\n",
+        "        return value\n",
+        "if __name__ == \"__main__\":\n",
+        "    game = GameTree()\n",
+        "    result = alpha_beta('A', 0, float('-inf'), float('inf'), True, game)\n",
+        "    print(f\"The optimal value is: {result}\")"
+      ],
+      "metadata": {
+        "id": "G3A08qfW9r4E",
+        "outputId": "587c6f41-daeb-4230-e9ad-600104fc06aa",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 14,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "The optimal value is: 3\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#CODE-7\n",
+        "VARIABLES=['csc','maths','phy','che','tam','eng','bio']\n",
+        "DOMAIN=['Monday','Tuesday','Wednesday']\n",
+        "def is_consistent(var,value,assignment):\n",
+        "    return True\n",
+        "def backtrack(assignment):\n",
+        "    if len(assignment)==len(VARIABLES):\n",
+        "        assigned_days=set(assignment.values())\n",
+        "        if all(day in assigned_days for day in DOMAIN):\n",
+        "            return assignment\n",
+        "        else:\n",
+        "            return None\n",
+        "    for var in VARIABLES:\n",
+        "        if var not in assignment:\n",
+        "            for value in DOMAIN:\n",
+        "                if is_consistent(var,value,assignment):\n",
+        "                    assignment[var]=value\n",
+        "                    result=backtrack(assignment)\n",
+        "                    if result:\n",
+        "                        return result\n",
+        "                    del assignment[var]\n",
+        "            return None\n",
+        "    return None\n",
+        "solution=backtrack({})\n",
+        "print(\"RESULT:\")\n",
+        "print(solution)"
+      ],
+      "metadata": {
+        "id": "ubPkqV1n-JWm",
+        "outputId": "d8a6e991-a7dc-479d-8a12-9ee4fe1b9b0b",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 15,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "RESULT:\n",
+            "{'csc': 'Monday', 'maths': 'Monday', 'phy': 'Monday', 'che': 'Monday', 'tam': 'Monday', 'eng': 'Tuesday', 'bio': 'Wednesday'}\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#CODE-8\n",
+        "facts = {\n",
+        "    'parent': [\n",
+        "        ('john', 'mary'), ('john', 'david'),\n",
+        "        ('susan', 'mary'), ('susan', 'david'),\n",
+        "        ('mary', 'linda'), ('mary', 'steve')\n",
+        "    ],\n",
+        "    'male': ['john', 'david', 'steve'],\n",
+        "    'female': ['susan', 'mary', 'linda']\n",
+        "}\n",
+        "\n",
+        "def query(predicate, *args):\n",
+        "    if predicate == 'father':\n",
+        "        return (args[0], args[1]) in facts['parent'] and args[0] in facts['male']\n",
+        "    elif predicate == 'mother':\n",
+        "        return (args[0], args[1]) in facts['parent'] and args[0] in facts['female']\n",
+        "    elif predicate == 'grandparent':\n",
+        "        for x, y in facts['parent']:\n",
+        "            if x == args[0]:\n",
+        "                for a, b in facts['parent']:\n",
+        "                    if a == y and b == args[1]:\n",
+        "                        return True\n",
+        "        return False\n",
+        "    elif predicate == 'sibling':\n",
+        "        p1 = set(p for p, c in facts['parent'] if c == args[0])\n",
+        "        p2 = set(p for p, c in facts['parent'] if c == args[1])\n",
+        "        return args[0] != args[1] and len(p1 & p2) > 0\n",
+        "    else:\n",
+        "        return False\n",
+        "\n",
+        "print(\"father(john,mary):\", query('father', 'john', 'mary'))\n",
+        "print(\"mother(susan,david):\", query('mother', 'susan', 'david'))\n",
+        "print(\"grandparent(john,linda):\", query('grandparent', 'john', 'linda'))\n",
+        "print(\"sibling(mary,david):\", query('sibling', 'mary', 'david'))\n",
+        "print(\"sibling(mary,mary):\", query('sibling', 'mary', 'mary'))\n"
+      ],
+      "metadata": {
+        "id": "PHP24KST_U5l",
+        "outputId": "44086199-9b34-4d56-8157-bbe69c66aac1",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 20,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "father(john,mary): True\n",
+            "mother(susan,david): True\n",
+            "grandparent(john,linda): True\n",
+            "sibling(mary,david): True\n",
+            "sibling(mary,mary): False\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "haRoJjtd_scs"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "colab": {
+      "name": "Welcome To Colab",
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
